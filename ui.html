@@ -453,7 +453,8 @@
       candidates: [],
       activeTab: 0,
       showConsent: true,
-      history: []
+      history: [],
+      isGenerating: false
     };
 
     // ================================================================================
@@ -518,6 +519,47 @@
       return text; // general
     }
 
+    // Real API call to backend
+    async function generateVariantsFromAPI(originalText, settings) {
+      const API_URL = 'https://webex-writer-backend.yankunux.workers.dev/api/generate-variants';
+      
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            originalText: originalText,
+            intent: settings.intent || '',
+            audience: settings.audience || 'general',
+            instructions: settings.instructions || ''
+          })
+        });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`API error (${response.status}): ${errorText}`);
+        }
+        
+        const data = await response.json();
+        
+        // Format API response to match our state structure
+        return data.variants.map(v => ({
+          text: v.text,
+          rationale: v.rationale,
+          appliedRules: v.appliedRules,
+          placeholders: preservePlaceholders(v.text),
+          originalPlaceholders: preservePlaceholders(originalText)
+        }));
+        
+      } catch (error) {
+        console.error('API call failed:', error);
+        throw error;
+      }
+    }
+    
+    // Fallback mock for when API fails
     function computeMockCandidates(originalText, settings) {
       const placeholders = preservePlaceholders(originalText);
       const candidates = [];
@@ -593,17 +635,33 @@
       document.getElementById('original-text').textContent = selection.characters;
       document.getElementById('text-info').textContent = `${selection.count} characters · ${selection.nodeName}`;
       
+      // Update generate buttons with loading state
+      const generateBtn = document.getElementById('generate-btn');
+      const regenerateBtn = document.getElementById('regenerate-btn');
+      
+      if (state.isGenerating) {
+        generateBtn.disabled = true;
+        regenerateBtn.disabled = true;
+        generateBtn.textContent = 'Generating...';
+        regenerateBtn.textContent = 'Generating...';
+      } else {
+        generateBtn.disabled = false;
+        regenerateBtn.disabled = false;
+        generateBtn.textContent = 'Generate';
+        regenerateBtn.textContent = 'Regenerate';
+      }
+      
       // Show/hide results section
       const resultsSection = document.getElementById('results-section');
       if (state.candidates.length > 0) {
         resultsSection.classList.remove('hidden');
-        document.getElementById('generate-btn').classList.add('hidden');
-        document.getElementById('regenerate-btn').classList.remove('hidden');
+        generateBtn.classList.add('hidden');
+        regenerateBtn.classList.remove('hidden');
         renderVariant();
       } else {
         resultsSection.classList.add('hidden');
-        document.getElementById('generate-btn').classList.remove('hidden');
-        document.getElementById('regenerate-btn').classList.add('hidden');
+        generateBtn.classList.remove('hidden');
+        regenerateBtn.classList.add('hidden');
       }
       
       // Render history
@@ -672,7 +730,7 @@
       };
     }
 
-    function generateVariants() {
+    async function generateVariants() {
       if (!state.currentSelection || state.currentSelection.kind === 'no-text') {
         return;
       }
@@ -680,8 +738,27 @@
       const settings = getSettings();
       const originalText = state.currentSelection.characters;
       
-      state.candidates = computeMockCandidates(originalText, settings);
-      state.activeTab = 0;
+      // Show loading state
+      state.isGenerating = true;
+      renderUI();
+      
+      try {
+        // Try to call the real API
+        state.candidates = await generateVariantsFromAPI(originalText, settings);
+        state.activeTab = 0;
+        
+      } catch (error) {
+        console.error('API generation failed, falling back to mock:', error);
+        
+        // Show error toast
+        showToast(`Using offline mode: ${error.message}`, 'warning');
+        
+        // Fallback to mock LLM
+        state.candidates = computeMockCandidates(originalText, settings);
+        state.activeTab = 0;
+      } finally {
+        state.isGenerating = false;
+      }
       
       renderUI();
       
