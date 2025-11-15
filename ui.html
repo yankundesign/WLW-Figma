@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write Like Webex</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #333;
+      background: #fff;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    /* Consent Banner */
+    .consent-banner {
+      background: #f0f4ff;
+      border: 1px solid #c7d7fe;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+
+    .consent-banner p {
+      margin-bottom: 8px;
+    }
+
+    .consent-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .consent-checkbox input {
+      margin: 0;
+    }
+
+    .consent-banner button {
+      margin-top: 8px;
+      padding: 4px 12px;
+      font-size: 11px;
+    }
+
+    /* Original Text Section */
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .original-text {
+      background: #f7f7f7;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 12px;
+      min-height: 60px;
+      font-size: 13px;
+      color: #666;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Controls */
+    .control-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #0d99ff;
+      box-shadow: 0 0 0 2px rgba(13, 153, 255, 0.1);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .radio-option input {
+      margin: 0;
+    }
+
+    input[type="radio"]:focus {
+      outline: 2px solid #0d99ff;
+      outline-offset: 2px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: #f7f7f7;
+    }
+
+    button:focus {
+      outline: none;
+      border-color: #0d99ff;
+      box-shadow: 0 0 0 2px rgba(13, 153, 255, 0.1);
+    }
+
+    button:active {
+      background: #e7e7e7;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    button.primary {
+      background: #0d99ff;
+      border-color: #0d99ff;
+      color: #fff;
+    }
+
+    button.primary:hover:not(:disabled) {
+      background: #0b7acc;
+      border-color: #0b7acc;
+    }
+
+    button.primary:active:not(:disabled) {
+      background: #095ba3;
+    }
+
+    /* Results Section */
+    .results-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .tab:hover {
+      background: #f7f7f7;
+    }
+
+    .tab.active {
+      border-bottom-color: #0d99ff;
+      color: #0d99ff;
+    }
+
+    #variant-text {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+      line-height: 1.5;
+      resize: vertical;
+      min-height: 120px;
+      margin-bottom: 16px;
+      background: #fff;
+    }
+
+    #variant-text:focus {
+      outline: none;
+      border-color: #0d99ff;
+      box-shadow: 0 0 0 2px rgba(13, 153, 255, 0.1);
+    }
+
+
+    /* History */
+    .history-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .history-item {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+
+    .history-text {
+      font-size: 12px;
+      margin-bottom: 6px;
+      color: #333;
+      word-break: break-word;
+    }
+
+    .history-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #888;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .history-actions button {
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: #888;
+    }
+
+    .empty-state h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #666;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toast.show {
+      display: flex;
+    }
+
+    .toast button {
+      padding: 4px 10px;
+      font-size: 12px;
+      background: #555;
+      border: none;
+      color: #fff;
+    }
+
+    .toast button:hover {
+      background: #666;
+    }
+
+    .toast.error {
+      background: #d73a49;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Consent Banner -->
+  <div id="consent-banner" class="consent-banner hidden">
+    <p><strong>Privacy Notice:</strong> Selected text may be sent to an AI service in future versions. This draft uses a local mock—no data leaves Figma.</p>
+    <div class="consent-checkbox">
+      <input type="checkbox" id="dont-show-again" />
+      <label for="dont-show-again" style="margin: 0; font-weight: normal;">Don't show again</label>
+    </div>
+    <button onclick="dismissConsent()">Dismiss</button>
+  </div>
+
+  <!-- Empty State -->
+  <div id="empty-state" class="empty-state">
+    <h3>Select a text layer to begin</h3>
+    <p>Choose a text layer in Figma to generate variants</p>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" class="hidden">
+    <!-- Original Text -->
+    <div class="section">
+      <h2>Original</h2>
+      <div id="original-text" class="original-text"></div>
+      <div class="hint" id="text-info"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="section">
+      <div class="control-group">
+        <label for="intent">Intent</label>
+        <select id="intent" aria-label="Select text intent">
+          <option value="">(blank)</option>
+          <option value="cta">CTA</option>
+          <option value="tooltip">Tooltip</option>
+          <option value="label">Label</option>
+          <option value="helper">Helper text</option>
+          <option value="dialog-title">Dialog title</option>
+          <option value="error">Error message</option>
+          <option value="success">Success toast</option>
+          <option value="placeholder">Placeholder</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Audience</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="audience-general" name="audience" value="general" checked />
+            <label for="audience-general" style="margin: 0; font-weight: normal;">General</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="audience-it-admins" name="audience" value="it-admins" />
+            <label for="audience-it-admins" style="margin: 0; font-weight: normal;">IT admins</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="audience-end-user" name="audience" value="end-user" />
+            <label for="audience-end-user" style="margin: 0; font-weight: normal;">End user</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="instructions">Instructions (optional)</label>
+        <textarea id="instructions" rows="3" placeholder="Add any specific instructions for text generation..." aria-label="Custom instructions" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: inherit; resize: vertical;"></textarea>
+      </div>
+
+      <div class="button-group">
+        <button id="generate-btn" class="primary" onclick="generateVariants()" aria-label="Generate text variants">Generate</button>
+        <button id="regenerate-btn" class="hidden" onclick="generateVariants()" aria-label="Regenerate text variants">Regenerate</button>
+        <button onclick="resetControls()" aria-label="Reset all controls">Reset</button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="results-section hidden">
+      <h2>Variants</h2>
+      
+      <div class="tabs">
+        <button class="tab active" data-tab="0" onclick="switchTab(0)" aria-label="Variant A">A</button>
+        <button class="tab" data-tab="1" onclick="switchTab(1)" aria-label="Variant B">B</button>
+        <button class="tab" data-tab="2" onclick="switchTab(2)" aria-label="Variant C">C</button>
+      </div>
+
+      <div id="variant-content">
+        <textarea id="variant-text" rows="6" aria-label="Editable variant text" placeholder="Generated text will appear here..."></textarea>
+
+        <div class="button-group">
+          <button class="primary" onclick="applyVariant()" aria-label="Apply this variant to Figma">Apply</button>
+          <button onclick="copyVariant()" aria-label="Copy this variant">Copy</button>
+          <button onclick="saveAsAlt()" aria-label="Save as alternative (stub)">Save as alt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div id="history-section" class="history-section hidden">
+      <h2>History</h2>
+      <div id="history-list"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span id="toast-message"></span>
+    <button id="toast-action" class="hidden"></button>
+  </div>
+
+  <script>
+    // ================================================================================
+    // State Management
+    // ================================================================================
+
+    let state = {
+      currentSelection: null,
+      candidates: [],
+      activeTab: 0,
+      showConsent: true,
+      history: []
+    };
+
+    // ================================================================================
+    // Initialization
+    // ================================================================================
+
+    // Check consent banner preference
+    try {
+      const consentDismissed = localStorage.getItem('writeLikeWebex:consentDismissed');
+      if (consentDismissed !== 'true') {
+        document.getElementById('consent-banner').classList.remove('hidden');
+      }
+    } catch (e) {
+      console.error('Error loading consent preference:', e);
+    }
+
+    function dismissConsent() {
+      const dontShowAgain = document.getElementById('dont-show-again').checked;
+      if (dontShowAgain) {
+        localStorage.setItem('writeLikeWebex:consentDismissed', 'true');
+      }
+      document.getElementById('consent-banner').classList.add('hidden');
+    }
+
+    // ================================================================================
+    // Mock LLM - Deterministic Text Transformations
+    // ================================================================================
+
+    function preservePlaceholders(text) {
+      const placeholderRegex = /\{\{.*?\}\}|\{[A-Za-z0-9_]+\}/g;
+      return text.match(placeholderRegex) || [];
+    }
+
+    function removeFiller(text) {
+      // Remove common filler words
+      return text
+        .replace(/\bnow\b/gi, '')
+        .replace(/\bplease\b/gi, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function makeMoreConcise(text) {
+      // Make text more concise by removing redundant words
+      return text
+        .replace(/\bin order to\b/gi, 'to')
+        .replace(/\bat this point in time\b/gi, 'now')
+        .replace(/\bdue to the fact that\b/gi, 'because')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function adjustForAudience(text, audience) {
+      // Simple audience-based adjustments
+      if (audience === 'it-admins') {
+        // More technical, concise
+        return text.replace(/\bhelp\b/gi, 'assist');
+      } else if (audience === 'end-user') {
+        // More friendly, clear
+        return text.replace(/\bassist\b/gi, 'help');
+      }
+      return text; // general
+    }
+
+    function computeMockCandidates(originalText, settings) {
+      const placeholders = preservePlaceholders(originalText);
+      const candidates = [];
+      
+      // Build applied rules based on settings
+      const baseRules = ['Clarity', 'Brevity'];
+      if (settings.intent) {
+        baseRules.push(`Intent: ${settings.intent}`);
+      }
+      if (settings.audience && settings.audience !== 'general') {
+        baseRules.push(`Audience: ${settings.audience}`);
+      }
+      if (settings.instructions) {
+        baseRules.push('Custom instructions applied');
+      }
+      
+      // Variant A: Basic cleanup
+      let variantA = removeFiller(originalText);
+      
+      candidates.push({
+        text: variantA,
+        rationale: 'Removed filler words for clarity',
+        appliedRules: ['Remove filler words', ...baseRules],
+        placeholders: preservePlaceholders(variantA)
+      });
+      
+      // Variant B: A + make more concise
+      let variantB = makeMoreConcise(variantA);
+      
+      candidates.push({
+        text: variantB,
+        rationale: 'More concise phrasing',
+        appliedRules: ['Remove filler words', 'Concise phrasing', ...baseRules],
+        placeholders: preservePlaceholders(variantB)
+      });
+      
+      // Variant C: B + audience adjustment
+      let variantC = adjustForAudience(variantB, settings.audience);
+      
+      candidates.push({
+        text: variantC,
+        rationale: `Optimized for ${settings.audience || 'general'} audience`,
+        appliedRules: ['Remove filler words', 'Concise phrasing', `Audience: ${settings.audience || 'general'}`, ...baseRules],
+        placeholders: preservePlaceholders(variantC)
+      });
+      
+      return candidates.map(c => ({
+        ...c,
+        originalPlaceholders: placeholders
+      }));
+    }
+
+
+    // ================================================================================
+    // UI Rendering
+    // ================================================================================
+
+    function renderUI() {
+      const emptyState = document.getElementById('empty-state');
+      const mainContent = document.getElementById('main-content');
+      
+      if (!state.currentSelection || state.currentSelection.kind === 'no-text') {
+        emptyState.classList.remove('hidden');
+        mainContent.classList.add('hidden');
+        return;
+      }
+      
+      emptyState.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      
+      // Render original text
+      const selection = state.currentSelection;
+      document.getElementById('original-text').textContent = selection.characters;
+      document.getElementById('text-info').textContent = `${selection.count} characters · ${selection.nodeName}`;
+      
+      // Show/hide results section
+      const resultsSection = document.getElementById('results-section');
+      if (state.candidates.length > 0) {
+        resultsSection.classList.remove('hidden');
+        document.getElementById('generate-btn').classList.add('hidden');
+        document.getElementById('regenerate-btn').classList.remove('hidden');
+        renderVariant();
+      } else {
+        resultsSection.classList.add('hidden');
+        document.getElementById('generate-btn').classList.remove('hidden');
+        document.getElementById('regenerate-btn').classList.add('hidden');
+      }
+      
+      // Render history
+      if (state.history.length > 0) {
+        document.getElementById('history-section').classList.remove('hidden');
+        renderHistory();
+      } else {
+        document.getElementById('history-section').classList.add('hidden');
+      }
+    }
+
+    function renderVariant() {
+      if (state.candidates.length === 0) return;
+      
+      const candidate = state.candidates[state.activeTab];
+      
+      // Update tabs
+      document.querySelectorAll('.tab').forEach((tab, index) => {
+        if (index === state.activeTab) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+        // Disable tabs if candidate doesn't exist
+        tab.disabled = index >= state.candidates.length;
+      });
+      
+      // Update textarea with variant text
+      const variantTextarea = document.getElementById('variant-text');
+      variantTextarea.value = candidate.text;
+    }
+
+    function renderHistory() {
+      const historyList = document.getElementById('history-list');
+      const items = state.history.slice().reverse(); // Most recent first
+      
+      historyList.innerHTML = items.map((item, index) => {
+        const date = new Date(item.ts);
+        const timeStr = date.toLocaleTimeString();
+        const preview = item.text.length > 60 ? item.text.substring(0, 60) + '…' : item.text;
+        
+        return `
+          <div class="history-item">
+            <div class="history-text">${preview}</div>
+            <div class="history-meta">
+              <span>${timeStr}</span>
+              <div class="history-actions">
+                <button onclick="reapplyHistory(${index})">Reapply</button>
+                <button onclick="copyHistory(${index})">Copy</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ================================================================================
+    // User Actions
+    // ================================================================================
+
+    function getSettings() {
+      return {
+        intent: document.getElementById('intent').value,
+        audience: document.querySelector('input[name="audience"]:checked').value,
+        instructions: document.getElementById('instructions').value
+      };
+    }
+
+    function generateVariants() {
+      if (!state.currentSelection || state.currentSelection.kind === 'no-text') {
+        return;
+      }
+      
+      const settings = getSettings();
+      const originalText = state.currentSelection.characters;
+      
+      state.candidates = computeMockCandidates(originalText, settings);
+      state.activeTab = 0;
+      
+      renderUI();
+      
+      // Auto-scroll to the results section
+      setTimeout(() => {
+        const resultsSection = document.getElementById('results-section');
+        if (resultsSection) {
+          resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+
+    function switchTab(index) {
+      if (index < 0 || index >= state.candidates.length) return;
+      state.activeTab = index;
+      renderVariant();
+    }
+
+    function resetControls() {
+      document.getElementById('intent').value = '';
+      document.querySelector('input[name="audience"][value="general"]').checked = true;
+      document.getElementById('instructions').value = '';
+      
+      state.candidates = [];
+      state.activeTab = 0;
+      
+      renderUI();
+    }
+
+    function applyVariant() {
+      if (!state.currentSelection || state.candidates.length === 0) return;
+      
+      // Get text from textarea (allows edited text to be applied)
+      const variantTextarea = document.getElementById('variant-text');
+      const text = variantTextarea.value;
+      
+      if (!text) return;
+      
+      parent.postMessage({
+        pluginMessage: {
+          type: 'APPLY_TEXT',
+          nodeId: state.currentSelection.nodeId,
+          text: text
+        }
+      }, '*');
+    }
+
+    function copyVariant() {
+      if (state.candidates.length === 0) return;
+      
+      // Get text from textarea (allows copying edited text)
+      const variantTextarea = document.getElementById('variant-text');
+      const text = variantTextarea.value;
+      
+      if (!text) return;
+      
+      // Copy to clipboard
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = text;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextarea);
+      
+      showToast('Copied to clipboard');
+    }
+
+    function saveAsAlt() {
+      // Stub for future implementation
+      showToast('Save as alternative (coming soon)');
+    }
+
+    function reapplyHistory(index) {
+      const reversedIndex = state.history.length - 1 - index;
+      const item = state.history[reversedIndex];
+      
+      if (!state.currentSelection) return;
+      
+      parent.postMessage({
+        pluginMessage: {
+          type: 'APPLY_TEXT',
+          nodeId: state.currentSelection.nodeId,
+          text: item.text
+        }
+      }, '*');
+    }
+
+    function copyHistory(index) {
+      const reversedIndex = state.history.length - 1 - index;
+      const item = state.history[reversedIndex];
+      
+      const textarea = document.createElement('textarea');
+      textarea.value = item.text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      
+      showToast('Copied to clipboard');
+    }
+
+    // ================================================================================
+    // Toast Notifications
+    // ================================================================================
+
+    let toastTimeout = null;
+
+    function showToast(message, options = {}) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      const toastAction = document.getElementById('toast-action');
+      
+      toastMessage.textContent = message;
+      
+      if (options.error) {
+        toast.classList.add('error');
+      } else {
+        toast.classList.remove('error');
+      }
+      
+      if (options.action) {
+        toastAction.textContent = options.action.label;
+        toastAction.onclick = options.action.callback;
+        toastAction.classList.remove('hidden');
+      } else {
+        toastAction.classList.add('hidden');
+      }
+      
+      toast.classList.add('show');
+      
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
+      
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, options.duration || 3000);
+    }
+
+    // ================================================================================
+    // Message Handling (UI ← Main)
+    // ================================================================================
+
+    window.onmessage = async (event) => {
+      const msg = event.data.pluginMessage;
+      
+      switch (msg.type) {
+        case 'SELECTION_DATA':
+          state.currentSelection = msg.payload;
+          state.candidates = [];
+          state.activeTab = 0;
+          
+          // Load history if we have a selection
+          if (msg.payload.kind === 'selection') {
+            parent.postMessage({
+              pluginMessage: {
+                type: 'LOAD_HISTORY',
+                nodeId: msg.payload.nodeId
+              }
+            }, '*');
+          } else {
+            state.history = [];
+          }
+          
+          renderUI();
+          break;
+          
+        case 'APPLY_RESULT':
+          if (msg.ok) {
+            const nodeName = state.currentSelection ? state.currentSelection.nodeName : 'layer';
+            showToast(`Applied to '${nodeName}'`, {
+              action: {
+                label: 'Undo',
+                callback: () => {
+                  parent.postMessage({
+                    pluginMessage: { type: 'REQUEST_UNDO' }
+                  }, '*');
+                }
+              },
+              duration: 5000
+            });
+            
+            // Reload history after successful apply
+            if (state.currentSelection) {
+              parent.postMessage({
+                pluginMessage: {
+                  type: 'LOAD_HISTORY',
+                  nodeId: state.currentSelection.nodeId
+                }
+              }, '*');
+            }
+          } else {
+            showToast(msg.error || 'Failed to apply text', { error: true, duration: 5000 });
+          }
+          break;
+          
+        case 'HISTORY_DATA':
+          state.history = msg.payload.items || [];
+          renderUI();
+          break;
+          
+        case 'UNDO_NOT_SUPPORTED':
+          showToast(msg.message || 'Use Cmd+Z / Ctrl+Z to undo', { duration: 3000 });
+          break;
+      }
+    };
+
+    // Request initial selection
+    parent.postMessage({ pluginMessage: { type: 'GET_SELECTION' } }, '*');
+  </script>
+</body>
+</html>

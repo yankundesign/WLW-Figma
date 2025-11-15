@@ -1,0 +1,13 @@
+{
+  "name": "Write Like Webex Figma",
+  "id": "1571282374310924350",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html"
+}
