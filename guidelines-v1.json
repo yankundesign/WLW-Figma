@@ -1,0 +1,300 @@
+{
+    "spec_name": "Webex Voice & Tone – Unified Guidelines v1",
+    "voice_principles": [
+      {
+        "id": "voice-benefit_led",
+        "name": "Benefit-led and outcome-focused",
+        "description": "Webex talks about outcomes first: smoother work, better experiences, clearer insights. Features are always framed as enablers, not the hero.",
+        "examples": {
+          "good": "Route calls to the right agent faster so customers spend less time waiting.",
+          "bad": "This feature provides multiple routing options and queue settings."
+        }
+      },
+      {
+        "id": "voice-plain_human",
+        "name": "Plain, human, and accessible",
+        "description": "Use clear, everyday language that feels like a helpful colleague. Avoid heavy jargon; when acronyms are needed, define them in context.",
+        "examples": {
+          "good": "Automatic Call Distribution (ACD) sends callers to the best available agent.",
+          "bad": "ACD optimizes queue paths using advanced routing engines and proprietary logic."
+        }
+      },
+      {
+        "id": "voice-action_oriented",
+        "name": "Actionable and task-focused",
+        "description": "Prefer imperative verbs and concrete steps. Tell people exactly what to do next, one action at a time.",
+        "examples": {
+          "good": "Open Control Hub, then go to Monitoring > Analytics > Calling.",
+          "bad": "Analytics can be accessed in various places within Control Hub."
+        }
+      },
+      {
+        "id": "voice-confident_reassuring",
+        "name": "Confident and reassuring",
+        "description": "Sound calm, capable, and on top of things. Acknowledge issues, but focus on what will help users fix them or move forward.",
+        "examples": {
+          "good": "We could not reach your device. Check your network connection, then try again.",
+          "bad": "Something went wrong with an unknown error. Please contact support."
+        }
+      },
+      {
+        "id": "voice-insightful_data_aware",
+        "name": "Insightful and data-aware",
+        "description": "Where it helps, use concrete thresholds, metrics, or stats to define quality and guide decisions instead of vague labels.",
+        "examples": {
+          "good": "Calls are flagged as poor when packet loss is above 5 percent or latency is above 400 ms.",
+          "bad": "Calls are flagged as poor when overall network performance is not acceptable."
+        }
+      },
+      {
+        "id": "voice-hybrid_choice",
+        "name": "Hybrid-work and choice oriented",
+        "description": "Recognize that people move between home, office, and mobile. Emphasize flexibility, continuity, and choice across devices and channels.",
+        "examples": {
+          "good": "Stay connected from your desk, your phone, or on the move without switching tools.",
+          "bad": "The service can be used in different environments when network conditions allow."
+        }
+      },
+      {
+        "id": "voice-role_aware",
+        "name": "Role-aware but inclusive",
+        "description": "Be explicit about who content is for. Speak directly to end users in second person, and describe admins or leaders in role-based third person.",
+        "examples": {
+          "good": "You can pause notifications on your phone. IT administrators can see overall quality trends in Control Hub.",
+          "bad": "Users and stakeholders can change settings and review analytics as needed."
+        }
+      }
+    ],
+    "tone_patterns": [
+      {
+        "id": "tone-marketing_overview",
+        "name": "Marketing and overview",
+        "use_for": "Web pages, one-pagers, hero sections, feature overviews, launch emails.",
+        "description": "Upbeat, confident, and benefit-led. Highlights how Webex simplifies work, elevates experiences, and modernizes collaboration without sounding exaggerated.",
+        "style": "Short benefit headlines, present tense, light promotional phrases used sparingly, focus on outcomes for people and businesses.",
+        "example": {
+          "before": "Advanced Calling Features Overview",
+          "after": "Transform your calls with advanced features that keep you connected anywhere."
+        }
+      },
+      {
+        "id": "tone-in_product_help",
+        "name": "In-product help and quick start",
+        "use_for": "Get started guides, panels, tooltips, walkthroughs, assistant prompts.",
+        "description": "Friendly, straightforward, and practical. Speaks directly to the user, showing how to complete tasks in a few clear steps.",
+        "style": "Second person, imperative steps, one action per sentence, simple headings like Messaging or Set up calling.",
+        "example": {
+          "before": "Meetings can be started and joined from the application as required.",
+          "after": "Open the app. Select Meetings. Click Start a meeting to begin right away."
+        }
+      },
+      {
+        "id": "tone-troubleshooting_error",
+        "name": "Troubleshooting and errors",
+        "use_for": "Error messages, diagnostics panels, troubleshooting guides, support flows.",
+        "description": "Calm, direct, and slightly urgent. Focuses on what happened, what it affects, and what to try next. Reassures admins and users that issues can be resolved.",
+        "style": "Short plain statements of the problem, followed by clear next steps. Use checklists for settings and avoid blame or panic.",
+        "example": {
+          "before": "Connection failed. Unknown error.",
+          "after": "We could not connect this call. Check the number assignment, forwarding, and voicemail settings, then try again."
+        }
+      },
+      {
+        "id": "tone-admin_it_guides",
+        "name": "Admin and IT guides",
+        "use_for": "Control Hub guides, deployment docs, analytics and quality documentation.",
+        "description": "Professional, authoritative, and data-backed. Acknowledges hybrid work challenges and shows how Webex and Control Hub provide visibility and control.",
+        "style": "Role-based third person for IT and business leaders, present tense, numeric stats and thresholds, outcomes such as reliability, security, and continuity.",
+        "example": {
+          "before": "Admins should consider many aspects of quality.",
+          "after": "IT administrators need visibility into packet loss, jitter, and latency so they can maintain a high-quality experience for employees."
+        }
+      },
+      {
+        "id": "tone-end_user_everyday",
+        "name": "End-user everyday app copy",
+        "use_for": "Desktop and mobile UI text, empty states, success messages, basic settings.",
+        "description": "Welcoming, empathetic, and low-pressure. Helps people stay in control of messages, meetings, and calls without feeling always on.",
+        "style": "Second person, mobile and life-context examples, mentions of balance and boundaries, simple tips and micro-CTAs.",
+        "example": {
+          "before": "Use Do Not Disturb to increase productivity at all times.",
+          "after": "Turn on Do Not Disturb during quiet hours so you can focus or step away without missing important follow-ups later."
+        }
+      },
+      {
+        "id": "tone-cx_decision_maker",
+        "name": "Contact center leaders and buyers",
+        "use_for": "Contact center feature guides, decision-maker decks, CX-focused content.",
+        "description": "Polished, benefit-led, and operations-aware. Shows how features improve customer experience, agent productivity, and insight-driven decisions.",
+        "style": "Outcome-oriented descriptions of AI, routing, and analytics; defined acronyms; short CTAs to deeper setup or launch resources.",
+        "example": {
+          "before": "Webex Contact Center has AI features and ACD routing.",
+          "after": "Webex Contact Center uses Automatic Call Distribution to send customers to the right agent and AI summaries to save agents time between interactions."
+        }
+      }
+    ],
+    "rules": [
+      {
+        "id": "rule-second_person_end_user",
+        "description": "Use second person for end-user copy; avoid generic users.",
+        "do": "Talk directly to the person using Webex.",
+        "dont": "Describe actions in distant, third-person language when you are giving user instructions.",
+        "example": {
+          "good": "You can mute notifications for this space when you need to focus.",
+          "bad": "Users can mute notifications for spaces when they need to focus."
+        }
+      },
+      {
+        "id": "rule-role_based_admin_voice",
+        "description": "Use role-based third person for admin and leader narratives.",
+        "do": "Name the role and describe what they need to see or do.",
+        "dont": "Address admins as a generic you in long-form strategy or buyer content.",
+        "example": {
+          "good": "IT administrators need a single place to deploy, monitor, and troubleshoot every device.",
+          "bad": "You should try to keep an eye on all devices so your users stay happy."
+        }
+      },
+      {
+        "id": "rule-benefit_first_headlines",
+        "description": "Lead with benefits in headings and intros, then mention features.",
+        "do": "Write short, sentence-case headlines that say what improves for the user or business.",
+        "dont": "Start with internal feature names or abstract labels only.",
+        "example": {
+          "good": "Cut wait times with smart call routing.",
+          "bad": "Routing configuration overview."
+        }
+      },
+      {
+        "id": "rule-imperative_steps",
+        "description": "Write steps and how-to content as imperative actions, one per line or sentence.",
+        "do": "Start steps with a verb and keep each one focused.",
+        "dont": "Pack multiple actions and conditions into one long sentence.",
+        "example": {
+          "good": "Open the Webex app. Select Meetings. Click Join next to the meeting you want.",
+          "bad": "Meetings can be joined from the Webex app where the user is able to select the appropriate option."
+        }
+      },
+      {
+        "id": "rule-sentence_case_headings",
+        "description": "Keep headings short and in sentence case.",
+        "do": "Use sentence-case labels tied to tasks or features.",
+        "dont": "Use shouty all-caps or vague abstract headings.",
+        "example": {
+          "good": "Set up voicemail",
+          "bad": "VOICEMAIL CONFIGURATION OVERVIEW"
+        }
+      },
+      {
+        "id": "rule-define_acronyms",
+        "description": "Avoid jargon. When an acronym is necessary, define it the first time in plain language.",
+        "do": "Pair the acronym with a short explanation of what it does or why it matters.",
+        "dont": "Assume everyone knows product and network acronyms.",
+        "example": {
+          "good": "Automatic Call Distribution (ACD) sends each caller to the best available agent.",
+          "bad": "ACD controls all inbound call flows using complex rules."
+        }
+      },
+      {
+        "id": "rule-nav_chevron_pattern",
+        "description": "Use a consistent chevron pattern to describe navigation paths.",
+        "do": "Show the exact path with arrows between levels.",
+        "dont": "Tell users to hunt around without naming where to go.",
+        "example": {
+          "good": "In Control Hub, go to Monitoring > Analytics > Calling.",
+          "bad": "In Control Hub, look through the menus until you find calling analytics."
+        }
+      },
+      {
+        "id": "rule-feature_plus_outcome",
+        "description": "Always tie advanced features to the outcome they enable.",
+        "do": "Explain why someone would turn a feature on or when it helps.",
+        "dont": "List features without context or benefit.",
+        "example": {
+          "good": "Turn on background noise removal so your voice stays clear in busy spaces.",
+          "bad": "Enable the background noise removal feature."
+        }
+      },
+      {
+        "id": "rule-calm_error_tone",
+        "description": "Keep error and troubleshooting copy calm, clear, and action-oriented.",
+        "do": "State what went wrong and give one or two specific next steps.",
+        "dont": "Use dramatic language, blame the user, or leave them without direction.",
+        "example": {
+          "good": "We could not register this device. Check the activation code and network, then try again.",
+          "bad": "Device registration failed. Please try again later."
+        }
+      },
+      {
+        "id": "rule-use_data_not_vague",
+        "description": "Where it helps decisions, use specific metrics instead of vague quality terms.",
+        "do": "Show thresholds or examples that define good, fair, or poor.",
+        "dont": "Rely only on labels like good quality or bad performance.",
+        "example": {
+          "good": "Investigate calls with jitter above 150 ms or packet loss above 5 percent.",
+          "bad": "Investigate calls with unusually bad network quality."
+        }
+      },
+      {
+        "id": "rule-checklists_for_settings",
+        "description": "Present multiple settings or requirements as scannable lists, not dense paragraphs.",
+        "do": "Use short item lines or bullets for configuration checks.",
+        "dont": "Hide critical settings in a wall of text.",
+        "example": {
+          "good": "Check: main number assignment; number activation; call forwarding; voicemail; Do Not Disturb.",
+          "bad": "Make sure you have a main number assigned, the number is activated, and call forwarding, voicemail, and Do Not Disturb are all configured correctly."
+        }
+      },
+      {
+        "id": "rule-short_ctas",
+        "description": "Keep calls to action short, direct, and imperative.",
+        "do": "Use a simple verb plus object.",
+        "dont": "Embed CTAs inside long, formal sentences.",
+        "example": {
+          "good": "Learn more about Control Hub.",
+          "bad": "For additional information about Control Hub, you may wish to consult the appropriate documentation."
+        }
+      },
+      {
+        "id": "rule-balance_and_boundaries",
+        "description": "For mobile and notification features, emphasize control and balance, not 24 by 7 responsiveness.",
+        "do": "Show how to set boundaries, quiet hours, or reminders that reduce stress.",
+        "dont": "Encourage always-on behavior or constant monitoring.",
+        "example": {
+          "good": "Set quiet hours so Webex only alerts you during your workday.",
+          "bad": "Use notifications to stay on top of new messages at all times."
+        }
+      },
+      {
+        "id": "rule-promo_phrases_sparingly",
+        "description": "Use playful or strong reassurance phrases sparingly and only in marketing-style contexts.",
+        "do": "Reserve lines like no problem or just leveled up for campaign headlines or hero copy.",
+        "dont": "Use overpromising phrases in error messages, troubleshooting, or sensitive admin flows.",
+        "example": {
+          "good": "Your calling experience just leveled up with new AI-powered features.",
+          "bad": "No problem, this error will never happen again."
+        }
+      }
+    ],
+    "tags": [
+      "headline_marketing",
+      "headline_product",
+      "cta_primary",
+      "cta_secondary",
+      "body_marketing",
+      "body_help",
+      "tooltip",
+      "helper_text",
+      "empty_state",
+      "quick_start_step",
+      "troubleshooting",
+      "error_message",
+      "warning_message",
+      "success_message",
+      "notification",
+      "admin_it",
+      "end_user",
+      "analytics_insight",
+      "mobile"
+    ]
+  }
+  
