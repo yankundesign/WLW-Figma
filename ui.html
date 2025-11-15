@@ -414,9 +414,8 @@
       <h2>Variants</h2>
       
       <div class="tabs">
-        <button class="tab active" data-tab="0" onclick="switchTab(0)" aria-label="Variant A">A</button>
-        <button class="tab" data-tab="1" onclick="switchTab(1)" aria-label="Variant B">B</button>
-        <button class="tab" data-tab="2" onclick="switchTab(2)" aria-label="Variant C">C</button>
+        <button class="tab active" data-tab="0" onclick="switchTab(0)" aria-label="Option 1">Option 1</button>
+        <button class="tab" data-tab="1" onclick="switchTab(1)" aria-label="Option 2">Option 2</button>
       </div>
 
       <div id="variant-content">
@@ -576,34 +575,25 @@
         baseRules.push('Custom instructions applied');
       }
       
-      // Variant A: Basic cleanup
-      let variantA = removeFiller(originalText);
+      // Option 1: Basic cleanup
+      let variant1 = removeFiller(originalText);
       
       candidates.push({
-        text: variantA,
+        text: variant1,
         rationale: 'Removed filler words for clarity',
         appliedRules: ['Remove filler words', ...baseRules],
-        placeholders: preservePlaceholders(variantA)
+        placeholders: preservePlaceholders(variant1)
       });
       
-      // Variant B: A + make more concise
-      let variantB = makeMoreConcise(variantA);
+      // Option 2: More concise + audience adjustment
+      let variant2 = makeMoreConcise(variant1);
+      variant2 = adjustForAudience(variant2, settings.audience);
       
       candidates.push({
-        text: variantB,
-        rationale: 'More concise phrasing',
-        appliedRules: ['Remove filler words', 'Concise phrasing', ...baseRules],
-        placeholders: preservePlaceholders(variantB)
-      });
-      
-      // Variant C: B + audience adjustment
-      let variantC = adjustForAudience(variantB, settings.audience);
-      
-      candidates.push({
-        text: variantC,
-        rationale: `Optimized for ${settings.audience || 'general'} audience`,
+        text: variant2,
+        rationale: `More concise and optimized for ${settings.audience || 'general'} audience`,
         appliedRules: ['Remove filler words', 'Concise phrasing', `Audience: ${settings.audience || 'general'}`, ...baseRules],
-        placeholders: preservePlaceholders(variantC)
+        placeholders: preservePlaceholders(variant2)
       });
       
       return candidates.map(c => ({
