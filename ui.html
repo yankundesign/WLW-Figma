@@ -83,7 +83,7 @@
       padding: 12px;
       min-height: 60px;
       font-size: 13px;
-      color: #666;
+      color: #000000;
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -246,46 +246,6 @@
       box-shadow: 0 0 0 2px rgba(13, 153, 255, 0.1);
     }
 
-    /* History */
-    .history-section {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid #e0e0e0;
-    }
-
-    .history-item {
-      background: #f7f7f7;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      padding: 12px;
-      margin-bottom: 8px;
-    }
-
-    .history-text {
-      font-size: 12px;
-      margin-bottom: 6px;
-      color: #333;
-      word-break: break-word;
-    }
-
-    .history-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: #888;
-    }
-
-    .history-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .history-actions button {
-      padding: 4px 10px;
-      font-size: 11px;
-    }
-
     /* Empty State */
     .empty-state {
       display: flex;
@@ -366,7 +326,7 @@
       <h1>Write Like Webex</h1>
       <p style="color: #666; margin: 0;">Select a text layer in Figma to generate Webex-style copy.</p>
       <div style="margin-top: 12px; font-size: 10px; color: #999; line-height: 1.5;">
-        Built by Yankun Wang · v0.1 · Last updated Nov 16, 2025
+        v0.2 · Last updated Nov 30, 2025
       </div>
     </div>
   </div>
@@ -375,7 +335,7 @@
   <div id="main-content" class="hidden">
     <!-- Original Text -->
     <div class="section">
-      <h2>Original</h2>
+      <h2>Original text</h2>
       <div id="original-text" class="original-text"></div>
       <div class="hint" id="text-info"></div>
     </div>
@@ -417,7 +377,7 @@
 
       <div class="control-group">
         <label for="instructions">Instructions (optional)</label>
-        <textarea id="instructions" rows="3" placeholder="Add any specific instructions for text generation..." aria-label="Custom instructions" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: inherit; resize: vertical;"></textarea>
+        <textarea id="instructions" rows="3" placeholder="Context: What's this for? | Style: Any preferences?" aria-label="Custom instructions" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: inherit; resize: vertical;"></textarea>
       </div>
 
       <div class="button-group">
@@ -442,15 +402,8 @@
         <div class="button-group">
           <button class="primary" onclick="applyVariant()" aria-label="Apply this variant to Figma">Apply</button>
           <button onclick="copyVariant()" aria-label="Copy this variant">Copy</button>
-          <button onclick="saveAsAlt()" aria-label="Save as alternative (stub)">Save as alt</button>
         </div>
       </div>
-    </div>
-
-    <!-- History Section -->
-    <div id="history-section" class="history-section hidden">
-      <h2>History</h2>
-      <div id="history-list"></div>
     </div>
   </div>
 
@@ -476,7 +429,6 @@
       candidates: [],
       activeTab: 0,
       showConsent: true,
-      history: [],
       isGenerating: false
     };
 
@@ -685,14 +637,6 @@
         generateBtn.classList.remove('hidden');
         regenerateBtn.classList.add('hidden');
       }
-      
-      // Render history
-      if (state.history.length > 0) {
-        document.getElementById('history-section').classList.remove('hidden');
-        renderHistory();
-      } else {
-        document.getElementById('history-section').classList.add('hidden');
-      }
     }
 
     function renderVariant() {
@@ -714,30 +658,6 @@
       // Update textarea with variant text
       const variantTextarea = document.getElementById('variant-text');
       variantTextarea.value = candidate.text;
-    }
-
-    function renderHistory() {
-      const historyList = document.getElementById('history-list');
-      const items = state.history.slice().reverse(); // Most recent first
-      
-      historyList.innerHTML = items.map((item, index) => {
-        const date = new Date(item.ts);
-        const timeStr = date.toLocaleTimeString();
-        const preview = item.text.length > 60 ? item.text.substring(0, 60) + '…' : item.text;
-        
-        return `
-          <div class="history-item">
-            <div class="history-text">${preview}</div>
-            <div class="history-meta">
-              <span>${timeStr}</span>
-              <div class="history-actions">
-                <button onclick="reapplyHistory(${index})">Reapply</button>
-                <button onclick="copyHistory(${index})">Copy</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
     }
 
     // ================================================================================
@@ -848,40 +768,6 @@
       showToast('Copied to clipboard');
     }
 
-    function saveAsAlt() {
-      // Stub for future implementation
-      showToast('Save as alternative (coming soon)');
-    }
-
-    function reapplyHistory(index) {
-      const reversedIndex = state.history.length - 1 - index;
-      const item = state.history[reversedIndex];
-      
-      if (!state.currentSelection) return;
-      
-      parent.postMessage({
-        pluginMessage: {
-          type: 'APPLY_TEXT',
-          nodeId: state.currentSelection.nodeId,
-          text: item.text
-        }
-      }, '*');
-    }
-
-    function copyHistory(index) {
-      const reversedIndex = state.history.length - 1 - index;
-      const item = state.history[reversedIndex];
-      
-      const textarea = document.createElement('textarea');
-      textarea.value = item.text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      
-      showToast('Copied to clipboard');
-    }
-
     // ================================================================================
     // Toast Notifications
     // ================================================================================
@@ -933,16 +819,10 @@
           state.candidates = [];
           state.activeTab = 0;
           
-          // Load history if we have a selection
-          if (msg.payload.kind === 'selection') {
-            parent.postMessage({
-              pluginMessage: {
-                type: 'LOAD_HISTORY',
-                nodeId: msg.payload.nodeId
-              }
-            }, '*');
-          } else {
-            state.history = [];
+          // Clear instructions when selecting a different text layer
+          const instructionsTextarea = document.getElementById('instructions');
+          if (instructionsTextarea) {
+            instructionsTextarea.value = '';
           }
           
           renderUI();
@@ -962,24 +842,9 @@
               },
               duration: 5000
             });
-            
-            // Reload history after successful apply
-            if (state.currentSelection) {
-              parent.postMessage({
-                pluginMessage: {
-                  type: 'LOAD_HISTORY',
-                  nodeId: state.currentSelection.nodeId
-                }
-              }, '*');
-            }
           } else {
             showToast(msg.error || 'Failed to apply text', { error: true, duration: 5000 });
           }
-          break;
-          
-        case 'HISTORY_DATA':
-          state.history = msg.payload.items || [];
-          renderUI();
           break;
           
         case 'UNDO_NOT_SUPPORTED':
